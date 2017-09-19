@@ -1,8 +1,8 @@
-#Virtual Enviroment Untuk IMPAL Telkom University - 2017 -iml
+# Virtual Enviroment Untuk IMPAL Telkom University - 2017 -iml
 
 proyek ini di adaptasi dari https://github.com/marcelbirkner/docker-ci-tool-stack
 
-##Cara Install
+## Cara Install
 
 untuk menjalankan ini akan dibutuhkan docker.
 Untuk yang menggunakan linux ubuntu dll bisa download di https://www.docker.com/community-edition dan ikuti cara installnya.
