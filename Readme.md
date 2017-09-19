@@ -35,6 +35,10 @@ image yang berhasil dibuat bisa dilihat dengan perintah sbb:
 ![list created image](screen_shoots/list_created_image.png "images")
 terus image2 tersebut bisa di ubah(export/save) jadi tar dengan perintah sbb
 ![list saved image](screen_shoots/save-images.png "images")
+
+untuk mematikan tinggal ```ctl-c```
+
+untuk menghapus instance docker ```docker-compose rm```
 selamat mencoba
 
 ## Mengakses tools
