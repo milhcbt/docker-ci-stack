@@ -1,8 +1,5 @@
 #Virtual Enviroment Untuk IMPAL Telkom University - 2017 -iml
 
-fork dari https://github.com/marcelbirkner/docker-ci-tool-stack
-
-
 ##Cara Install
 untuk menjalankan ini akan dibutuhkan docker.
 Untuk yang menggunakan linux ubuntu dll bisa download di https://www.docker.com/community-edition dan ikuti cara installnya.
@@ -38,9 +35,6 @@ image yang berhasil dibuat bisa dilihat dengan perintah sbb:
 ![list created image](screen_shoots/list_created_image.png "images")
 terus image2 tersebut bisa di ubah(export/save) jadi tar dengan perintah sbb
 ![list saved image](screen_shoots/save-images.png "images")
-jika ada masalah silahkan diskusikan digroup.
-
-konfigurasi ini belum selasai, dan akan terus berubah.
 selamat mencoba
 
 ## Mengakses tools
