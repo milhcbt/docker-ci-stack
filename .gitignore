@@ -1,2 +1,10 @@
 data
 .idea/
+.DS_Store
+/log.txt
+/.gradle/
+/build/
+app/.idea/
+app/.gradle/
+app/out/
+app/build/
