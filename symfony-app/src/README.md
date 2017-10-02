@@ -1,83 +1,52 @@
-Symfony Demo Application
-========================
+<p align="center"><img src="https://api-platform.com/logo-250x250.png" alt="API Platform"></p>
 
-The "Symfony Demo Application" is a reference application created to show how
-to develop Symfony applications following the recommended best practices.
+API Platform is a next-generation web framework designed to easily create API-first projects without
+compromising extensibility and flexibility:
 
-[![Build Status](https://travis-ci.org/symfony/symfony-demo.svg?branch=master)](https://travis-ci.org/symfony/symfony-demo)
+* Design your own data model as plain old PHP classes or [**import an existing one**](https://api-platform.com/docs/schema-generator/) from the [Schema.org](https://schema.org/) vocabulary
+* **Expose in minutes a hypermedia REST API** with pagination, data validation, access control, relation embedding, filters and error handling...
+* Benefit from Content Negotiation: [JSON-LD](http://json-ld.org), [Hydra](http://hydra-cg.com), [HAL](http://stateless.co/hal_specification.html), [YAML](http://yaml.org/), [JSON](http://www.json.org/), [XML](https://www.w3.org/XML/) and [CSV](https://www.ietf.org/rfc/rfc4180.txt) are supported out of the box
+* Enjoy the **beautiful automatically generated API documentation** (Swagger/OpenAPI)
+* Add [**a convenient Material Design administration interface**](https://github.com/api-platform/admin) built with [React](https://facebook.github.io/react/) without writing a line of code
+* **Scaffold a fully functional Single-Page-Application** built with [React](https://facebook.github.io/react/), [Redux](http://redux.js.org/), [React Router](https://reacttraining.com/react-router/) and [Bootstrap](https://getbootstrap.com/) thanks to [the CRUD generator](github.com/api-platform/generate-crud)
+* Install a development environment and deploy your project in production using **[Docker](https://docker.com)**
+* Easily add **[JSON Web Token](https://jwt.io/) or [OAuth](https://oauth.net/) authentication**
+* Create specs and tests with a **developer friendly API testing tool** on top
+  of [Behat](http://behat.org/)
+  
+[![Build Status](https://travis-ci.org/api-platform/core.svg?branch=master)](https://travis-ci.org/api-platform/core)
+[![Build status](https://ci.appveyor.com/api/projects/status/grwuyprts3wdqx5l?svg=true)](https://ci.appveyor.com/project/dunglas/dunglasapibundle)
+[![Coverage Status](https://coveralls.io/repos/github/api-platform/core/badge.svg)](https://coveralls.io/github/api-platform/core)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/92d78899-946c-4282-89a3-ac92344f9a93/mini.png)](https://insight.sensiolabs.com/projects/92d78899-946c-4282-89a3-ac92344f9a93)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/api-platform/core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/api-platform/core/?branch=master)
 
-Requirements
-------------
+The official project documentation is available **[on the API Platform website](https://api-platform.com)**.
 
-  * PHP 5.5.9 or higher;
-  * PDO-SQLite PHP extension enabled;
-  * and the [usual Symfony application requirements](https://symfony.com/doc/current/reference/requirements.html).
+API Platform embraces open web standards (Swagger, JSON-LD, Hydra, HAL, JWT, OAuth,
+HTTP...) and the [Linked Data](https://www.w3.org/standards/semanticweb/data) movement. Your API will automatically
+expose structured data in Schema.org/JSON-LD. It means that your API Platform application
+is usable **out of the box** with technologies of the semantic
+web.
 
-If unsure about meeting these requirements, download the demo application and
-browse the `http://localhost:8000/config.php` script to get more detailed
-information.
+It also means that **your SEO will be improved** because **[Google leverages these
+formats](https://developers.google.com/structured-data/)**.
 
-Installation
-------------
+Last but not least, API Platform is built on top of the [Symfony](https://symfony.com) framework.
+It means than you can:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+* use **thousands of Symfony bundles** with API Platform
+* integrate API Platform in **any existing Symfony application**
+* reuse **all your Symfony skills** and benefit of the incredible
+  amount of Symfony documentation
+* enjoy the popular [Doctrine ORM](http://www.doctrine-project.org/projects/orm.html) (used by default, but fully optional: you can
+  use the data provider you want, including but not limited to MongoDB ODM and ElasticSearch)
 
-First, install the [Symfony Installer](https://github.com/symfony/symfony-installer)
-if you haven't already. Then, install the Symfony Demo Application executing
-this command anywhere in your system:
+Install
+-------
 
-```bash
-$ symfony demo
+[Read the official "Getting Started" guide](https://api-platform.com/docs/core/getting-started).
 
-# if you're using Windows:
-$ php symfony demo
-```
+Credits
+-------
 
-If the `demo` command is not available, update your Symfony Installer to the
-most recent version executing the `symfony self-update` command.
-
-> **NOTE**
->
-> If you can't use the Symfony Installer, download and install the demo
-> application using Git and Composer:
->
->     $ git clone https://github.com/symfony/symfony-demo symfony_demo
->     $ cd symfony_demo/
->     $ composer install --no-interaction
-
-Usage
------
-
-There is no need to configure a virtual host in your web server to access the application.
-Just use the built-in web server:
-
-```bash
-$ cd symfony_demo/
-$ php bin/console server:run
-```
-
-This command will start a web server for the Symfony application. Now you can
-access the application in your browser at <http://localhost:8000>. You can
-stop the built-in web server by pressing `Ctrl + C` while you're in the
-terminal.
-
-> **NOTE**
->
-> If you want to use a fully-featured web server (like Nginx or Apache) to run
-> Symfony Demo application, configure it to point at the `web/` directory of the project.
-> For more details, see:
-> https://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html
-
-Troubleshooting
----------------
-
-The current Symfony Demo application uses Symfony 3.x version. If you want to
-use the legacy Symfony 2.8 version, clone the Git repository and checkout the
-`v0.8.4` tag, which is the last one compatible with Symfony 2.8:
-
-```bash
-$ git clone https://github.com/symfony/symfony-demo symfony_demo
-$ cd symfony_demo/
-$ git checkout tags/v0.8.4 -b v0.8.4
-$ composer install
-```
+Created by [Kévin Dunglas](https://dunglas.fr). Commercial support available at [Les-Tilleuls.coop](https://les-tilleuls.coop).
