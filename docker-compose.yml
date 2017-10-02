@@ -5,83 +5,98 @@ networks:
     driver: bridge
 
 services:
- nexus:
-  build: ./nexus
-  ports:
-    - "18081:8081"
-  networks:
-    - prodnetwork
+#  nexus:
+#   build: ./nexus
+#   ports:
+#     - "18081:8081"
+#   networks:
+#     - prodnetwork
+# 
+#  jenkins:
+#   build: ./jenkins
+#   ports:
+#     - "18080:8080"
+#   networks:
+#     - prodnetwork
+#   volumes:
+#     - ./data/var/run/docker.sock:/var/run/docker.sock
+#     - ./data/usr/local/bin/docker:/usr/bin/docker
+#     - ./data/opt/jenkins/:/var/lib/jenkins/
+#   depends_on:
+#     - nexus
+#     - gitlab
+#     - sonar
+#   environment:
+#     - NEXUS_PORT=8081
+#     - SONAR_PORT=9000
+#     - SONAR_DB_PORT=5432
+# 
+#  sonar:
+#   build: ./sonar
+#   ports:
+#    - "19000:9000"
+#    #- "5432:5432"
+#   networks:
+#     - prodnetwork
+#   depends_on:
+#     - sonardb
+#   environment:
+#    - SONARQUBE_JDBC_URL=jdbc:postgresql://sonardb:5432/sonar
+#    - SONARQUBE_JDBC_USERNAME=sonar
+#    - SONARQUBE_JDBC_PASSWORD=sonar
+  mysql:
+      build:
+        context: ./mysql
+        dockerfile: ./Dockerfile
+      environment:
+        - MYSQL_DATABASE=api_platform
+        # You should definitely change the password in production
+        - MYSQL_PASSWORD=api_platform
+        - MYSQL_RANDOM_ROOT_PASSWORD=true
+        - MYSQL_USER=api_platform
+      volumes:
+        # - db-data:/var/lib/mysql:rw
+        # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+        - ./data/lib/mysql:/var/lib/mysql:rw
+      ports:
+        - "3306:3306"
+#  sonardb:
+#   networks:
+#     - prodnetwork
+#   image: postgres
+#   ports:
+#     - "5432:5432"
+#   environment:
+#    - POSTGRES_USER=sonar
+#    - POSTGRES_PASSWORD=sonar
+#   volumes:
+#     - postgres-data:/var/lib/postgresql/data
 
- jenkins:
-  build: ./jenkins
-  ports:
-    - "18080:8080"
-  networks:
-    - prodnetwork
-  volumes:
-    - ./data/var/run/docker.sock:/var/run/docker.sock
-    - ./data/usr/local/bin/docker:/usr/bin/docker
-    - ./data/opt/jenkins/:/var/lib/jenkins/
-  depends_on:
-    - nexus
-    - gitlab
-    - sonar
-  environment:
-    - NEXUS_PORT=8081
-    - SONAR_PORT=9000
-    - SONAR_DB_PORT=5432
+#  gitlab:
+#   image: gitlab/gitlab-ce:9.3.11-ce.0
+#   restart: always
+#   networks:
+#     - prodnetwork
+#   environment:
+#     GITLAB_OMNIBUS_CONFIG: |
+#       # external_url 'https://gitlab.example.com'
+#       # Add any other gitlab.rb configuration here, each on its own line
+#       - COMPOSE_CONVERT_WINDOWS_PATHS=1
+#   ports:
+#     - "80:80"
+#     - "443:443"
+#     - "2222:22"
+#   volumes:
+#     - ./data/opt/gitlab/config:/etc/gitlab
+#     - ./data/opt/gitlab/logs:/var/log/gitlab
+#     - gitlab-opt:/var/opt/gitlab
 
- sonar:
-  build: ./sonar
-  ports:
-   - "19000:9000"
-   #- "5432:5432"
-  networks:
-    - prodnetwork
-  depends_on:
-    - sonardb
-  environment:
-   - SONARQUBE_JDBC_URL=jdbc:postgresql://sonardb:5432/sonar
-   - SONARQUBE_JDBC_USERNAME=sonar
-   - SONARQUBE_JDBC_PASSWORD=sonar
-
- sonardb:
-  networks:
-    - prodnetwork
-  image: postgres
-  ports:
-    - "5432:5432"
-  environment:
-   - POSTGRES_USER=sonar
-   - POSTGRES_PASSWORD=sonar
-  volumes:
-    - postgres-data:/var/lib/postgresql/data
-
- gitlab:
-  image: gitlab/gitlab-ce:9.3.11-ce.0
-  restart: always
-  networks:
-    - prodnetwork
-  environment:
-    GITLAB_OMNIBUS_CONFIG: |
-      # external_url 'https://gitlab.example.com'
-      # Add any other gitlab.rb configuration here, each on its own line
-      - COMPOSE_CONVERT_WINDOWS_PATHS=1
-  ports:
-    - "80:80"
-    - "443:443"
-    - "2222:22"
-  volumes:
-    - ./data/opt/gitlab/config:/etc/gitlab
-    - ./data/opt/gitlab/logs:/var/log/gitlab
-    - gitlab-opt:/var/opt/gitlab
-
- spring-app:
-  build: ./spring-app
-  ports:
-  - "7000:8080"
- symfony-app:
-  build: ./symfony-app
+#  spring-app:
+#   build: ./spring-app
+#   ports:
+#   - "7000:8080"
+#  symfony-app:
+#   build: ./symfony-app
   
 
 volumes:
@@ -89,3 +104,5 @@ volumes:
     external: true
   postgres-data:
     external: true
+  db-data: {}
+
