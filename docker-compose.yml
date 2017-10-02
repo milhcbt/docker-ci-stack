@@ -12,54 +12,57 @@ services:
 #   networks:
 #     - prodnetwork
 # 
-#  jenkins:
-#   build: ./jenkins
-#   ports:
-#     - "18080:8080"
-#   networks:
-#     - prodnetwork
-#   volumes:
-#     - ./data/var/run/docker.sock:/var/run/docker.sock
-#     - ./data/usr/local/bin/docker:/usr/bin/docker
-#     - ./data/opt/jenkins/:/var/lib/jenkins/
-#   depends_on:
-#     - nexus
-#     - gitlab
-#     - sonar
-#   environment:
-#     - NEXUS_PORT=8081
-#     - SONAR_PORT=9000
-#     - SONAR_DB_PORT=5432
-# 
-#  sonar:
-#   build: ./sonar
-#   ports:
-#    - "19000:9000"
-#    #- "5432:5432"
-#   networks:
-#     - prodnetwork
-#   depends_on:
-#     - sonardb
-#   environment:
-#    - SONARQUBE_JDBC_URL=jdbc:postgresql://sonardb:5432/sonar
-#    - SONARQUBE_JDBC_USERNAME=sonar
-#    - SONARQUBE_JDBC_PASSWORD=sonar
-  mysql:
-      build:
-        context: ./mysql
-        dockerfile: ./Dockerfile
-      environment:
-        - MYSQL_DATABASE=api_platform
-        # You should definitely change the password in production
-        - MYSQL_PASSWORD=api_platform
-        - MYSQL_RANDOM_ROOT_PASSWORD=true
-        - MYSQL_USER=api_platform
-      volumes:
-        # - db-data:/var/lib/mysql:rw
-        # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-        - ./data/lib/mysql:/var/lib/mysql:rw
-      ports:
-        - "3306:3306"
+ jenkins:
+  build: ./jenkins
+  ports:
+    - "18080:8080"
+  networks:
+    - prodnetwork
+  volumes:
+    - ./data/var/run/docker.sock:/var/run/docker.sock
+    - ./data/usr/local/bin/docker:/usr/bin/docker
+    - ./data/opt/jenkins/:/var/lib/jenkins/
+  depends_on:
+    # - nexus
+    # - gitlab
+    - sonar
+  environment:
+    # - NEXUS_PORT=8081
+    - SONAR_PORT=9000
+    - SONAR_DB_PORT=5432
+
+ sonar:
+  build: ./sonar
+  ports:
+   - "19000:9000"
+   #- "5432:5432"
+  networks:
+   - prodnetwork
+  depends_on:
+    # - sonardb
+   - mysql
+  environment:
+   - SONARQUBE_JDBC_URL=jdbc:mysql://mysql:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
+   - SONARQUBE_JDBC_USERNAME=sonar
+   - SONARQUBE_JDBC_PASSWORD=sonar
+ mysql:
+  build:
+   context: ./mysql
+   dockerfile: ./Dockerfile
+  environment:
+   - MYSQL_DATABASE=api_platform
+   # You should definitely change the password in production
+   - MYSQL_PASSWORD=api_platform
+   - MYSQL_RANDOM_ROOT_PASSWORD=true
+   - MYSQL_USER=api_platform
+  volumes:
+   # - db-data:/var/lib/mysql:rw
+   # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+   - ./data/lib/mysql:/var/lib/mysql:rw
+  ports:
+   - "3306:3306"
+  networks:
+   - prodnetwork
 #  sonardb:
 #   networks:
 #     - prodnetwork

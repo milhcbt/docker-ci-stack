@@ -1,2 +1,4 @@
-create database sonar;
-GRANT ALL ON sonar.* TO 'api_platform'@'localhost';
+CREATE  DATABASE IF NOT EXISTS sonar;
+CREATE USER 'sonar'@'%' IDENTIFIED BY 'sonar';
+GRANT ALL ON sonar.* TO 'sonar'@'%';
+FLUSH PRIVILEGES ;

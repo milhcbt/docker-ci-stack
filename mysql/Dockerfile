@@ -1,6 +1,6 @@
 FROM mysql:5.7
 
-COPYuhoenuah init-sonardb.sql /docker-entrypoint-initdb.d/init-sonardb.sql
+COPY init-sonardb.sql /docker-entrypoint-initdb.d/init-sonardb.sql
 COPY docker-healthcheck.sh /usr/local/bin/docker-healthcheck
 RUN chmod +x /usr/local/bin/docker-healthcheck
 
