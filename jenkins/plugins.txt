@@ -30,6 +30,7 @@ cloudbees-bitbucket-branch-source:2.2.3
 cloudbees-folder:6.1.2
 credentials:2.1.16
 credentials-binding:1.13
+cucumber-living-documentation:1.0.11
 dashboard-view:2.9.11
 display-url-api:2.0
 docker-commons:1.8
