@@ -2,7 +2,7 @@ FROM jenkins/jenkins:lts
 
 USER root
 RUN apt-get update \
-      && apt-get install -y sudo curl\
+      && apt-get install -y sudo curl maven \
       && rm -rf /var/lib/apt/lists/*
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
@@ -33,7 +33,7 @@ RUN /usr/local/bin/install-plugins.sh $(cat /var/jenkins_home/plugins.txt| tr '\
 # Configure Jenkins
 ############################################
 # Jenkins settings
-COPY config/config.xml /usr/share/jenkins/ref/config.xml
+# COPY config/config.xml /usr/share/jenkins/ref/config.xml
 
 # Jenkins Settings, i.e. Maven, Groovy, ...
 COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
@@ -41,10 +41,10 @@ COPY config/hudson.plugins.groovy.Groovy.xml /usr/share/jenkins/ref/hudson.plugi
 COPY config/maven-global-settings-files.xml /usr/share/jenkins/ref/maven-global-settings-files.xml
 
 # SSH Keys & Credentials
-COPY config/credentials.xml /usr/share/jenkins/ref/credentials.xml
-COPY config/ssh-keys/cd-demo /usr/share/jenkins/ref/.ssh/id_rsa
-COPY config/ssh-keys/cd-demo.pub /usr/share/jenkins/ref/.ssh/id_rsa.pub
+# COPY config/credentials.xml /usr/share/jenkins/ref/credentials.xml
+# COPY config/ssh-keys/cd-demo /usr/share/jenkins/ref/.ssh/id_rsa
+# COPY config/ssh-keys/cd-demo.pub /usr/share/jenkins/ref/.ssh/id_rsa.pub
 
 # tell Jenkins that no banner prompt for pipeline plugins is needed
 # see: https://github.com/jenkinsci/docker#preinstalling-plugins
-RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
+# RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
